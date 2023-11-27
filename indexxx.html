@@ -228,7 +228,7 @@
                         <a href="images/PraveenKumarResume.pdf" download><button class="btn btn2">Download Resume</button></a>
                     </div>
                     <div class="contact-right">
-                        <form name="submit-to-google-sheet">
+                        <form id="myForm" name="submit-to-google-sheet">
                             <input type="text" name="Name" placeholder="Enter Your Name" required>
                             <input type="Email" name="Email" placeholder="Enter Your Email">
                             <textarea name="Message" rows="6" placeholder="Enter Your Message"></textarea>
@@ -246,26 +246,21 @@
         </div>
 
 
-
-
         <script>
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbziPcj5aNssTLt9TVVxGDKheVUvV5cdG2GRmhP_Y8J8jqdcTgDHWsV-1syI-8bBFpEa/exec'
-            const form = document.forms['submit-to-google-sheet']
-            const msg = document.getElementById("msg")
-        
-            form.addEventListener('submit', e => {
-              e.preventDefault()
-              fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                .then(response => {
-                    msg.innerHTML = "Message sent Successfully"
-                    setTimeout(function(){
-                        msg.innerHTML = ""
-                    }, 7000)
-                    form.reset()
-                })
-                .catch(error => console.error('Error!', error.message))
-            })
-        </script>
+            document.getElementById('myForm').addEventListener('submit', function (event) {
+              event.preventDefault();
+              document.getElementById('msg').innerText = 'Message sent Successfully';
+              document.getElementById('msg').style.display = 'block';
+          
+              document.getElementById('myForm').reset();
+          
+              setTimeout(function () {
+                document.getElementById('msg').innerText = '';
+                document.getElementById('msg').style.display = 'none';
+              }, 4000);
+            });
+          </script>
+
 </body>
 
 </html>
